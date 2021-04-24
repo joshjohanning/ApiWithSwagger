@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiWithSwagger</name>
+    </assembly>
+    <members>
+        <member name="M:ApiWithSwagger.ApiControllers.UserController.Get(System.Int32)">
+            <summary>
+            Get User by userId
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiWithSwagger.ApiControllers.UserController.GetListUser(System.Collections.Generic.List{System.String})">
+            <summary>
+            Get list of users, input is an array of user emails
+            </summary>
+            <param name="emails"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiWithSwagger.ApiControllers.UserController.GetUserWithItems(System.String)">
+            <summary>
+            Get an user with Deposit items
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiWithSwagger.ApiControllers.UserController.AddUser(ApiWithSwagger.Dtos.UserDto)">
+            <summary>
+            Add an User
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiWithSwagger.ApiControllers.UserController.UpdateUser(ApiWithSwagger.Dtos.UserDto)">
+            <summary>
+            Update an User
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
