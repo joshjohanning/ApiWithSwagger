@@ -23,6 +23,8 @@
     <None Remove="ApiWithSwagger.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApiWithSwagger.xml" />
+    <Content Include="ApiWithSwagger.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
