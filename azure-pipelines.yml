@@ -70,7 +70,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 'Visual Studio Enterprise – MPN(93ddb8b3-ddb9-4d1c-ba59-421456e65538)'
+              azureSubscription: 'new - Visual Studio Enterprise – MPN(93ddb8b3-ddb9-4d1c-ba59-421456e65538)'
               appType: 'webAppLinux'
               appName: joshswaggerapi
               package: '$(Pipeline.Workspace)/**/*.zip'
