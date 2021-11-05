@@ -1,0 +1,77 @@
+trigger:
+  branches:
+    include:
+    - "*"
+
+stages:
+- stage: build
+  displayName: Build
+  jobs:
+  - job: build
+    displayName: Build
+    pool: ubuntu-latest
+    steps:
+    # - task: UseDotNet@2
+    #   displayName: "Use .NET Core 5.0.x"
+    #   inputs:
+    #     version: 5.0.x
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: restore
+        projects: "**/*.csproj"
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        projects: "**/*.csproj"
+        arguments: "--configuration Release"
+    # - task: DotNetCoreCLI@2
+    #   displayName: Test
+    #   inputs:
+    #     command: 'test'
+    #     projects: '**/*[Tt]ests/*.csproj'
+    #     arguments: '--configuration Release --collect:"XPlat Code Coverage"'
+    #     publishTestResults: true
+    # - task: CmdLine@2
+    #   displayName: Create Code coverage report
+    #   inputs:
+    #     script: |
+    #       dotnet tool install -g dotnet-reportgenerator-globaltool
+    #       reportgenerator -reports:$(Agent.WorkFolder)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+    # - task: PublishCodeCoverageResults@1
+    #   displayName: 'Publish code coverage'
+    #   inputs:
+    #     codeCoverageTool: Cobertura
+    #     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    - task: DotNetCoreCLI@2
+      displayName: DotNet Publish API
+      inputs:
+        command: publish
+        publishWebProjects: True
+        arguments: "--configuration Release --output $(Build.ArtifactStagingDirectory)/api"
+        zipAfterPublish: True
+    
+    - publish: $(Build.ArtifactStagingDirectory)/api
+      artifact: api
+
+
+- stage: deploy_azure
+  displayName: Deploy Azure
+  jobs:
+  - deployment: swagger_api_azure
+    displayName: Deploy to azure
+    pool: ubuntu-latest
+    environment:
+      name: swagger_api_azure
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Deploy Azure Web App'
+            inputs:
+              azureSubscription: 'Visual Studio Enterprise – MPN(93ddb8b3-ddb9-4d1c-ba59-421456e65538)'
+              appType: 'webAppLinux'
+              appName: joshswaggerapi
+              package: '$(Pipeline.Workspace)/**/*.zip'
+
