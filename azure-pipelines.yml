@@ -9,7 +9,8 @@ stages:
   jobs:
   - job: build
     displayName: Build
-    pool: ubuntu-latest
+    pool: 
+      vmImage: ubuntu-latest
     steps:
     # - task: UseDotNet@2
     #   displayName: "Use .NET Core 5.0.x"
@@ -60,7 +61,8 @@ stages:
   jobs:
   - deployment: swagger_api_azure
     displayName: Deploy to azure
-    pool: ubuntu-latest
+    pool: 
+      vmImage: ubuntu-latest
     environment:
       name: swagger_api_azure
     strategy:
