@@ -72,6 +72,6 @@ stages:
             inputs:
               azureSubscription: 'new - Visual Studio Enterprise – MPN(93ddb8b3-ddb9-4d1c-ba59-421456e65538)'
               appType: 'webAppLinux'
-              appName: 'joshswaggerapi'
+              appName: 'joshswaggerapi.azurewebsites.net'
               package: '$(Pipeline.Workspace)/**/*.zip'
 
