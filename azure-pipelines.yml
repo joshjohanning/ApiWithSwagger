@@ -1,7 +1,5 @@
-trigger:
-  branches:
-    include:
-    - "*"
+trigger: 
+- master
 
 stages:
 - stage: build
